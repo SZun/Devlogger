@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit } from "@angular/core";
+import { LogService } from "src/app/services/log.service";
 @Component({
-  selector: 'app-log-form',
-  templateUrl: './log-form.component.html',
-  styleUrls: ['./log-form.component.css']
+  selector: "app-log-form",
+  templateUrl: "./log-form.component.html",
+  styleUrls: ["./log-form.component.css"]
 })
 export class LogFormComponent implements OnInit {
-
-  constructor() { }
+  id: string;
+  text: string;
+  date: any;
+  constructor(private logService: LogService) {}
 
   ngOnInit() {
+    this.logService.selectedLog.subscribe(log => {
+      if (log !== null) {
+        this.id = log.id;
+        this.text = log.text;
+        this.date = log.date;
+      }
+    });
   }
-
 }
